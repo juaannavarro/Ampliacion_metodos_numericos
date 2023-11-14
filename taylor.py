@@ -1,44 +1,63 @@
+# MÉTODO DE TAYLOR -- ORDEN 2
+
 import matplotlib.pyplot as plt
 
-# Método de Taylor de orden 2
-def taylor_order_2(f, df_dx,df_dy, x, y, h, m):
+
+def taylor(f, df_dx, df_dy, x, y, h, n):
+    '''
+    Función que implementa el método de Euler para resolver una EDO
+    '''
     u = []
     v = []
-    for i in range(m):
-        # Taylor de orden 2
-        y = y + h * f(x, y) + (0.5 * h**2)*( df_dx(x, y)+ f(x, y) * df_dy(x, y))
+    for i in range(n):
+        y = y + h * f(x, y) + (h**2/2) * (df_dx(x, y) + df_dy(x, y) * f(x, y))
         x = x + h
         u.append(x)
         v.append(y)
     return u, v
 
-# Función y su derivada respecto a x
 def f(x, y):
-    return (1 + 4 * x * y) / (3 * x**2)
+    '''
+    Aquí se define la EDO
+    '''
+    return (1 + 4*x*y)/(3*x**2)
 
 def df_dx(x, y):
-    return-(4*x*y+2/3*x**3)
-def df_dy(x, y):
-    return 4 / (3 * x) 
+    '''
+    Aquí se define la derivada parcial de f con respecto a x
+    '''
+    return -(4*x*y + 2)/(3*x**3)
 
+def df_dy(x, y):
+    '''
+    Aquí se define la derivada parcial de f con respecto a y
+    '''
+    return (4)/(3*x)
+
+def error(v, v_aprox):
+    '''
+    Devuelve el error absoluto
+    '''
+    return abs(v - v_aprox)
+
+
+# DATOS
 x = 0.5
 y = -1
 h = 0.035
-m = 100
+n = 100
 
-u, v = taylor_order_2(f, df_dx,df_dy, x, y, h, m)
+# Aplicamos el método de Euler
+u, v = taylor(f, df_dx, df_dy, x, y, h, n)
 
-print(v[-1])
+# Imprimimos la última y del bucle
+print('w_100: ', v[-1])
 
 # Error
-def error(v, v_aprox):
-    return abs(v - v_aprox)
+v_e = -11.46
+print('Error: ', error(v_e, v[-1]))
 
-print('Error:', error(-11.46, v[-1]))
-
-# Gráfico
-plt.plot(u, v, label='Taylor de orden 2')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.legend()
+# Graficar la solución
+plt.plot(u, v)
+plt.grid(True)
 plt.show()
