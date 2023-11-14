@@ -23,7 +23,7 @@ h = 0.035 #Esto se modifica
 m = 100 #Esto se modifica
 u,v = euler(f,x,y,h,m)
 
-print(v[-1])
+print('w_100', v[-1])
 
 def error(v,v_aprox):
     return abs(v-v_aprox)

@@ -26,7 +26,7 @@ m = 100   # Esto se modifica
 
 u, v = predictor_corrector(f, x, y, h, m)
 
-print(v[-1])
+print('w_100', v[-1])
 
 #Error
 
