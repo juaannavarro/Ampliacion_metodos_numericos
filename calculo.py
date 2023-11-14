@@ -13,13 +13,13 @@ def euler(f,x,y,h,m):
     return u,v
 
 def f(x,y):
-    return (2-3*x-y)/(x-1)
+    return (x+y)/(x-y)
 
 
-x = 2
-y = -1
-h = 0.02
-m = 200
+x = -4
+y = 4
+h = 0.04
+m = 100
 u,v = euler(f,x,y,h,m)
 
 print(v[-1])
