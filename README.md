@@ -1,4 +1,4 @@
-<h1 align="center">Euler</h1>
+<h1 align="center">Métodos</h1>
 
 <h2>Repositorio:</h2>
 
