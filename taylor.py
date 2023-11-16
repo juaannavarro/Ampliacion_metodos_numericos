@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def taylor(f, df_dx, df_dy, x, y, h, n):
     '''
-    Función que implementa el método de Euler para resolver una EDO
+    Función que implementa el método de Taylor para resolver una EDO
     '''
     u = []
     v = []
