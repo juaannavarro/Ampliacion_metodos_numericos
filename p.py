@@ -10,10 +10,16 @@ def rugen_kutta(f, x, y, h, n):
     u = []
     v = []
     for i in range(n):
-        y = y + h * f(x + (h/2), y + (h/2)*f(x, y)) 
+        k1= f(x,y)
+        k2= f(x + (h/2), y + (h/2)*k1)
+        k3= f(x + (h/2), y + (h/2)*k2)
+        k4= f(x + h, y + h*k3)
+
+        y= y+ (h/6)*(k1 + 2*k2 + 2*k3 + k4)
         x = x + h
-        u.append(x)
+        
         v.append(y)
+        u.append(x)
     return u, v
 
 def f(x, y):
