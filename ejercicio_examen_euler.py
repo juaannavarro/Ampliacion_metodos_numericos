@@ -82,7 +82,7 @@ print('y(1/2): {:.7f}'.format(f_exacta1(1/2)) )
 
 #Error absoluto
 v_e=f_exacta1(1/2)
-print('Error{:.7f}'.format(error(v_e, v0[-1])))
+print('Error: {:.7f}'.format(error(v_e, v0[-1])))
 
 
 # Graficar la solución
