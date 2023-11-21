@@ -1,46 +1,60 @@
-import numpy as np
+# MÉTODO DE RUNGE-KUTTA -- ORDEN 4
+
 import matplotlib.pyplot as plt
 
-# Definir la función
+
+def taylor(f, x, y, h, n):
+    '''
+    Función que implementa el método de Runge-Kutta para resolver una EDO
+    '''
+    u = []
+    v = []
+    for i in range(n):
+        k1 = f(x, y)
+        k2 = f(x + (h/2), y + (h/2)*k1)
+        k3 = f(x + (h/2), y + (h/2)*k2)
+        k4 = f(x + h, y + h*k3)
+        a1 = 1/6
+        a2 = 1/3
+        a3 = 1/3
+        a4 = 1/6
+        x = x + h
+        y = y + h * (a1*k1 + a2*k2 + a3*k3 + a4*k4)
+        u.append(x)
+        v.append(y)
+    return u, v
+
 def f(x, y):
+    '''
+    Aquí se define la EDO
+    '''
     return (1 + 4*x*y)/(3*x**2)
 
-# Método de Runge-Kutta de cuarto orden
-def runge_kutta(x0, y0, xn, n):
-    h = (xn-x0)/float(n)
-    x = np.linspace(x0, xn, n+1)
-    y = np.zeros(n+1)
-    y[0] = y0
-    for i in range(n):
-        k1 = h * f(x[i], y[i])
-        k2 = h * f(x[i] + 0.5*h, y[i] + 0.5*k1)
-        k3 = h * f(x[i] + 0.5*h, y[i] + 0.5*k2)
-        k4 = h * f(x[i] + h, y[i] + k3)
-        y[i+1] = y[i] + (k1 + 2*k2 + 2*k3 + k4)/6
-    return x, y
 
-# Parámetros
-x0 = 0.5
-y0 = -1
-xn = 4
+def error(v, v_aprox):
+    '''
+    Devuelve el error absoluto
+    '''
+    return abs(v - v_aprox)
+
+
+# DATOS
+x = 0.5
+y = -1
+h = 0.035
 n = 100
 
-# Calcular y trazar la solución
-x, y = runge_kutta(x0, y0, xn, n)
-plt.plot(x, y, 'o-', label='Runge-Kutta')
-plt.title('Solución de f(x,y)=2xy con Runge-Kutta')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.legend()
+# Aplicamos el método de Euler
+u, v = taylor(f, x, y, h, n)
+
+# Imprimimos la última y del bucle
+print('w_100: ', v[-1])
+
+# Error
+v_e = -11.46
+print('Error: ', error(v_e, v[-1]))
+
+# Graficar la solución
+plt.plot(u, v)
 plt.grid(True)
-plt.show()
-
-# Imprimir los resultados
-for i in range(n+1):
-    print(f"x = {x[i]:.4f}, y = {y[i]:.4f}")
-
-# Calcular error
-y_exact = -11.46
-error = abs(y_exact - y[-1])
-print(f"Error = {error:.4f}")
-
+#plt.show()
