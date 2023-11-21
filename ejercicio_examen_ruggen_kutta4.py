@@ -1,6 +1,5 @@
-# MÉTODO DE RUNGE-KUTTA -- ORDEN 4
-
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def runge_kutta_4(f, x, y, h, n):
@@ -25,8 +24,13 @@ def f(x, y):
     '''
     Aquí se define la EDO
     '''
-    return (1 + 4*x*y)/(3*x**2)
+    return y - x**2 + 1
 
+def f_exacta(x):
+    '''
+    Función exacta
+    '''
+    return (x + 1)**2 - (1/2)*np.exp(x)
 
 def error(v, v_aprox):
     '''
@@ -36,22 +40,30 @@ def error(v, v_aprox):
 
 
 # DATOS
-x = 0.5
-y = -1
-h = 0.035
-n = 100
+# -----
+# Rango de x
+x_inicial = 0
+x_final = 1/2
+# Datos iniciales
+x = 0
+y = 1/2
+# Número de subintervalos que nos permite calcular el valor de h (paso)
+n = 5
+h = (x_final - x_inicial)/n
 
-# Aplicamos el método de Euler
+# Aplicamos el método de Runge-Kutta de orden 4
 u, v = runge_kutta_4(f, x, y, h, n)
 
-# Imprimimos la última y del bucle
-print('w_100: ', v[-1])
+# Imprimimos la última y del bucle con 7 decimales
+print('w_100: {:.7f}'.format(v[-1]))
 
-# Error
-v_e = -11.46
-print('Error: ', error(v_e, v[-1]))
+# Imprimimos la solución exacta con 7 decimales
+print('y(',x_final,'): {:.7f}'.format(f_exacta(x_final)) )
+
+# Error absoluto con 7 decimales
+print('Error: {:.7f}'.format(error(f_exacta(x_final), v[-1])))
 
 # Graficar la solución
-plt.plot(u, v)
+'''plt.plot(u, v)
 plt.grid(True)
-plt.show()
+plt.show()'''
