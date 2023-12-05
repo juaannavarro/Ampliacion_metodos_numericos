@@ -67,7 +67,7 @@ print('y(',x_final,'): {:.7f}'.format(f_exacta(x_final)) )
 print('Error: {:.7f}'.format(error(f_exacta(x_final), v[-1])))
 
 
-# Graficar la solución
+'''# Graficar la solución
 # --------------------
 # Dibujamos las soluciones numéricas
 plt.plot(u, v)
@@ -76,4 +76,4 @@ plt.plot(u, v)
 plt.plot(x_real, y_real)
 
 plt.grid(True)
-plt.show()
+plt.show()'''
