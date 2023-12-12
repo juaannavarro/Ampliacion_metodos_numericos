@@ -20,8 +20,8 @@ def f(x, u, v,m): #la m sale de la ecuacion de Bessel
 x_inicial = 0
 x_final = 0.95
 x = 0
-u0 = 0 #recodar que la u es la y
-v0 = 1 #es y'
+u = 0 #recodar que la u es la y
+v = 1 #es y'
 n = 100
 h = (x_final - x_inicial) / n
 m=1 #para la ecuacion de Bessel
@@ -31,12 +31,12 @@ m=1 #para la ecuacion de Bessel
 
 
 # Método de Euler de segundo orden 
-r0, t0 = euler2(f, x, u0, v0, h, n,m)
+r, t = euler2(f, x, u, v, h, n,m)
 
 
 
 # Gráfica
-plt.plot(r0, t0, label='Solución numérica')
+plt.plot(r, t, label='Solución numérica')
 plt.xlabel('x')
 plt.ylabel('u(x)')
 plt.title('Bessel')
