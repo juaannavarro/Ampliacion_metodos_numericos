@@ -19,7 +19,7 @@ def runge_kutta_4_sistemas(f1, f2, t, x, y, h, n):
         k41 = f1(t + h, x + (h * k31), y + (h * k32))
         k42 = f2(t + h, x + (h * k31), y + (h * k32))
 
-        t = t + h
+        t = t + h 
         x = x + (h/6) * (k11 + (2 * k21) + (2 * k31) + k41)
         y = y + (h/6) * (k12 + (2 * k22) + (2 * k32) + k42)
         u.append(x)
@@ -36,7 +36,7 @@ def f2(t, x, y):
     '''
     Aquí se define la segunda EDO de orden 1 del sistema
     '''
-    return -c*y - k*math.sin(x)
+    return -x + x**2
 
 def generar_datos_iniciales(n):
     '''
@@ -44,8 +44,8 @@ def generar_datos_iniciales(n):
     '''
     datos_iniciales = []
     for _ in range(n):
-        x0 = np.random.uniform(0, 5)
-        y0 = np.random.uniform(0, 5)
+        x0 = np.random.uniform(-2, 2)
+        y0 = np.random.uniform(-2, 2)
         datos_iniciales.append((x0, y0))
 
     return datos_iniciales
@@ -60,6 +60,9 @@ def plot_plano_fases(f1, f2, t, datos, h, n):
         # Graficamos
         plt.plot(u, v)
 
+    plt.xlim(-2, 2)
+    plt.ylim(-2, 2)
+
     plt.xlabel('x(t)')
     plt.ylabel('y(t)')
     plt.title('Plano de Fases')
@@ -72,7 +75,7 @@ k = 1
 c = 0
 # Rango de t (tiempo)
 t_inicial = 0 # Normalmente siempre arranca en 0
-t_final = 20
+t_final = 2
 # Datos iniciales
 t = 0
 x = 0.5 # Primera EDO1 del sistema
