@@ -43,14 +43,13 @@ x_inicial = 0
 x_final = 1/2
 # Datos iniciales (me da n 3 datos iniciales donde x siempre es igual, pero y varía)
 x = 0
-y0 = 1/2
-y1 = 0
-y2 = -1
+y = 1/2
+
 # Número de subintervalos que nos permite calcular el valor de h (paso)
 n = 10
 h = (x_final - x_inicial)/n
 # Aplicamos el método de Predictor correcctor 3 veces (una para cada dato inicial) y obtenemos las soluciones numéricas
-u, v = rugen_kutta(f, x, y0, h, n)
+u, v = rugen_kutta(f, x, y, h, n)
 
 
 # Obtenemos las soluciones exactas
