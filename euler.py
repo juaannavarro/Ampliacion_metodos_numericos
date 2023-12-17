@@ -6,7 +6,7 @@ import numpy as np
 def euler(f,x,y,h,n):
     u = []
     v = []
-    for i in range(m):
+    for i in range(n):
         y = y + h*f(x,y)
         x = x + h
         u.append(x)
