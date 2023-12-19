@@ -14,12 +14,13 @@ def euler2(f, x, u, v, h, n, m):
 
 def f(x, u, v,m): #la m sale de la ecuacion de Bessel
     '''Aqui definimos la EDO de segundo orden (se despeja la y'')'''
-    return (2*x)/(1-x**2) * v - (m*(m+1))/(1-x**2) * u
+    return ((np.exp(-2*x))/(1-x**2))-4*v-4*u
 
 # Datos
-x_inicial = 0
-x_final = 0.95
-x = 0
+m=1
+x_inicial = -0.99
+x_final = 1
+x = -0.99
 u = 0 #recodar que la u es la y
 v = 1 #es y'
 n = 100
@@ -43,5 +44,6 @@ plt.title('Bessel')
 plt.legend()
 plt.grid(True)
 plt.show()
+plt.savefig('grafica3.png')
 
 
